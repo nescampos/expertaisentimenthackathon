@@ -1,0 +1,47 @@
+﻿@model ExpertAI.RequestAllocator.Models.MakeRequestViewModel
+
+@{
+    ViewBag.Title = "Send a request or complaint";
+}
+
+<h2>Send a request or complaint</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="row">
+    <div class="form-horizontal col-md-12">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Form.Request, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Form.Request, new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Form.Request, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal col-md-12">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Form.Area, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Form.Area, new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Form.Area, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Send request/complaint" class="btn btn-success btn-lg px-4" />
+        </div>
+    </div>
+</div>
+    
+}
+
+<br />
+<br />
+<div>
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-outline-secondary btn-lg px-4" })
+</div>

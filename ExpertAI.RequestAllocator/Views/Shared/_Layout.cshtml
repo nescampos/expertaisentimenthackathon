@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Employee Monitor</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                @Html.ActionLink("Employee Monitor", "Index", "Home", new { area = "" }, new { @class = "d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" })
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>@Html.ActionLink("Start", "Index", "Home", null, new { @class = "nav-link px-2 text-secondary" })</li>
+                    <li>@Html.ActionLink("Send request/complaint", "MakeRequest", "Home", null, new { @class = "nav-link px-2 text-secondary" })</li>
+                    <li>@Html.ActionLink("Monitor", "Index", "Monitor", null, new { @class = "nav-link px-2 text-secondary" })</li>
+                </ul>
+                <div class="text-end">
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link px-2 text-secondary">Logout</a>
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login", "Login", "Account", null, new { @class = "nav-link px-2 text-secondary" })
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Employee Monitor</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

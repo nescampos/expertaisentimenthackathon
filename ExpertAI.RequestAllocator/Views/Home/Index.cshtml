@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Employee Monitor</h1>
+    <p class="lead">Employee Monitor is a service that allows using Artificial Intelligence (thanks to <a href="https://www.expert.ai/" target="_blank">Expert.ai</a>) to analyze the anonymous comments of your employees to see their situation, discover the problems or detect their personal situations through sentiment analysis.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Are you an employee?</h2>
+        <p>
+            You can comment on your situation anonymously, the system will take your comment and generate some information (such as your feeling, or keywords) and a supervisor or human resources manager will analyze the whole situation to take the necessary actions.
+        </p>
+        <p>@Html.ActionLink("Send your queries/complaints.", "MakeRequest", "Home", null, new { @class = "btn btn-primary btn-lg px-4 me-sm-3" })</p>
+    </div>
+    <div class="col-md-6">
+        <h2>Are you a HR manager?</h2>
+        <p>You can authenticate and review the comments sent by your employees.</p>
+
+        <p>@Html.ActionLink("Review", "Index", "Monitor", null, new { @class = "btn btn-success btn-lg px-4" })</p>
+    </div>
+</div>

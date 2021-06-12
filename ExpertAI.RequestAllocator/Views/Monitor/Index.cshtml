@@ -1,0 +1,82 @@
+﻿@model ExpertAI.RequestAllocator.Models.IndexMonitorViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Monitoring comments from employees.</h2>
+
+
+<div class="row">
+    <div class="px-4 py-5 my-5 text-center">
+        General feeling: @Model.Sentiment
+    </div>
+</div>
+<div class="row">
+        <div class="col-md-4">
+            <h4>Filters</h4>
+
+            Areas:
+
+            <table class="table table-responsive table-condensed">
+                <tr>
+                    <td>@Html.ActionLink("All", "Index", "Monitor")</td>
+                    <td>@Model.Qty</td>
+                </tr>
+                @foreach (var request in Model.Areas)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(request.Key, "Index", "Monitor", new { area = request.Key }, null)</td>
+                        <td>@Html.ActionLink(request.Count().ToString(), "Index", "Monitor", new { area = request.Key }, null)</td>
+                    </tr>
+
+                }
+            </table>
+
+            Main Topics:
+
+            <table class="table table-responsive table-condensed">
+                <tr>
+                    <td>@Html.ActionLink("All", "Index", "Monitor")</td>
+                    <td>@Model.Qty</td>
+                </tr>
+                @foreach (var request in Model.Topics)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(request.Key, "Index", "Monitor", new { topic = request.Key }, null)</td>
+                        <td>@Html.ActionLink(request.Count().ToString(), "Index", "Monitor", new { topic = request.Key }, null)</td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+        <div class="col-md-8">
+            <h4>Comments/requests/complaints</h4>
+
+            <table class="table table-responsive table-condensed">
+                <thead>
+                    <tr>
+                        <th>Creation Date</th>
+                        <th>Area</th>
+                        <th>Text</th>
+                        <th>Sentiment</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                @foreach (var request in Model.Requests)
+                {
+                    <tr>
+                        <td>@request.CreatedAt</td>
+                        <td>@request.Area</td>
+                        <td>@request.RequestText</td>
+                        <td>@(request.Sentiment > 0? "Positive": "Negative")</td>
+                        <td>@(string.Join(",",request.TopicRequests.Select(x => x.Label))) </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+
